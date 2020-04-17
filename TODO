@@ -1,0 +1,9 @@
+Refaire gestion erreur parcing option -c
+Parcing IP
+
+
+Bonus option    -c envoie x paquet
+                -D  affiche l'heure avant la ligne
+                -w  arrete ping au bout de x secondes
+                -f  affiche de point pour un paquet
+                -i  modif intervalle entre 2 envois
