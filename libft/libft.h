@@ -26,6 +26,8 @@ void				ft_bzero(void *s, size_t n);
 
 size_t				ft_strlen(const char *s);
 
+int					ft_arraystrlen(char **array);
+
 char				*ft_strdup(const char *s1);
 
 char				*ft_strcpy(char *dst, const char *src);
@@ -207,6 +209,8 @@ int					ft_hex_to_color(char *hex, int free_it);
 int					ft_hex_to_int(char *hex, int free_it);
 
 int					ft_pow(int nb, int power);
+
+double				ft_powf(double nb, int power);
 
 int					rgba_to_int(int r, int g, int b, int a);
 

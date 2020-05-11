@@ -1,24 +1,44 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-batz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/09 10:00:41 by karakvra          #+#    #+#             */
+/*   Updated: 2020/05/09 10:06:04 by karakvra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 
 #include "ft_ping.h"
 
-void    initializationPing(t_ping *ping) {
-    ft_memset(&ping->options, 0, sizeof(ping->options));
-    ping->dst = NULL;
+void	stop_loop()
+{
+	loop_ping = 0;
 }
 
-int	main(int argc, char **argv)
+void	init_ping(t_ping *ping)
 {
-    t_ping  ping;
+	ft_memset(&ping->options, 0, sizeof(ping->options));
+	ping->dst = NULL;
+	loop_ping = 1;
+}
 
-	if (argc <= 1) {
-        printHelp();
-    }
-    else {
-        initializationPing(&ping);
-        parsing(argc, argv, &ping);
-    }
-    send_ping(&ping);
+int		main(int argc, char **argv)
+{
+	t_ping	ping;
+
+	if (argc <= 1)
+	{
+		print_help();
+	}
+	else
+	{
+		init_ping(&ping);
+		parsing(argc, argv, &ping);
+	}
+	signal(SIGINT, stop_loop);
+	send_ping(&ping);
 	return (0);
 }

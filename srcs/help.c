@@ -1,10 +1,9 @@
 
-
-
 #include "ft_ping.h"
 
-
-void    printHelp() {
-    printf("Usage: ft_ping [-Dfhv] [-c count] [-i interval] [-w deadline] destination\n");
-    exit(EXIT_SUCCESS);
+void	print_help(void)
+{
+	printf("Usage: ft_ping [-Dfhv] [-c count] [-i interval] ");
+	printf("[-w deadline] destination\n");
+	exit(EXIT_SUCCESS);
 }

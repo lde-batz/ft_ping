@@ -1,18 +1,15 @@
 
-
 #include "ft_ping.h"
 
-void    freeDoubleChar(char **ptr) {
-    int i = -1;
+void	free_double_char(char **ptr)
+{
+	int i;
 
-    if (ptr) {
-        while(ptr[++i]) {
-            free(ptr[i]);
-        }
-        free(ptr);
-    }
-}
-
-void freePing(t_ping *ping) {
-    if (ping) {}
+	if (ptr)
+	{
+		i = -1;
+		while (ptr[++i])
+			free(ptr[i]);
+		free(ptr);
+	}
 }

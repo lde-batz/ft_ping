@@ -25,7 +25,7 @@ NAME :=	libft.a
 
 SRC :=	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		ft_isdigit.c ft_isprint.c ft_itoa.c ft_memalloc.c ft_memccpy.c \
-		 ft_memcmp.c ft_memcpy.c ft_memdel.c ft_memmove.c \
+		ft_memcmp.c ft_memcpy.c ft_memdel.c ft_memmove.c \
 		ft_memset.c ft_putchar.c ft_putchar_fd.c ft_putendl.c \
 		ft_putendl_fd.c ft_putnbr.c ft_putnbr_fd.c ft_putstr.c \
 		ft_putstr_fd.c ft_strcat.c ft_strchr.c ft_strclr.c ft_strcmp.c \
@@ -41,11 +41,11 @@ SRC :=	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		listcontainer_removeelement.c listcontainer_reindex.c \
 		listcontainer_size.c listcontainer_fastsize.c \
 		ft_lststrsplit.c ft_strsplitone.c ft_letter_to_int.c \
-		ft_hex_to_int.c ft_pow.c ft_hex_to_color.c \
+		ft_hex_to_int.c ft_pow.c ft_powf.c ft_hex_to_color.c \
 		ft_rgba_to_int.c ft_lstget_fromelement.c get_next_line.c \
 		ft_mmalloc.c ft_ffree.c ft_memjoin.c ft_isnum.c ft_charjoin.c \
 		ft_getnextchar.c ft_strsubuntil.c ft_atoi_base.c ft_factorial.c \
-		ft_next_sqrt.c ft_putnbr_base.c ft_sqrt.c
+		ft_next_sqrt.c ft_putnbr_base.c ft_sqrt.c ft_arraystrlen.c
 
 OBJ := 	$(SRC:.c=.o)
 

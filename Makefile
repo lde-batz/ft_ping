@@ -7,6 +7,7 @@ SRC = 	main.c\
 		help.c\
 		parsing.c\
 		send.c\
+		init_send.c\
 		error.c\
 		tools.c
 
