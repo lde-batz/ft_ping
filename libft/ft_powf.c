@@ -6,7 +6,7 @@ double	ft_powf(double nb, int power)
 	int		i;
 
 	if (power == 0)
-		return 1;
+		return (1);
 	else if (power > 0)
 	{
 		nbr = nb;
@@ -21,5 +21,5 @@ double	ft_powf(double nb, int power)
 		while (i-- > power)
 			nbr /= nb;
 	}
-	return nbr;
+	return (nbr);
 }

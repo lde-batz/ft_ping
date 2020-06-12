@@ -3,12 +3,17 @@
 
 NAME = ft_ping
 
-SRC = 	main.c\
-		help.c\
-		parsing.c\
-		send.c\
-		init_send.c\
-		error.c\
+SRC = 	main.c \
+		parsing.c \
+		get_ip.c \
+		ping.c \
+		loop.c \
+		send_ping.c \
+		recv_ping.c \
+		stats.c \
+		checksum.c \
+		signal.c \
+		exit.c \
 		tools.c
 
 SRC_DIR = srcs/

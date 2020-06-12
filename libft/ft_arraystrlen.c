@@ -2,11 +2,12 @@
 
 int		ft_arraystrlen(char **array)
 {
-	int i = -1;
+	int i;
 
+	i = -1;
 	if (!array)
-		return -1;
+		return (-1);
 	while (array[++i])
 		;
-	return i;
+	return (i);
 }

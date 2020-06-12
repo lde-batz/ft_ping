@@ -142,7 +142,6 @@ int					ft_sqrt(int nb);
 
 void				ft_putnbr_base(int nbr, char *base);
 
-
 typedef struct		s_list
 {
 	void			*content;
