@@ -15,7 +15,7 @@ void	init_pkt(void)
 	ping->pkt.hdr.checksum = checksum_calcul(&ping->pkt, sizeof(ping->pkt));
 }
 
-void		print_send_verbose(void)
+void	print_send_verbose(void)
 {
 	struct in_addr	in_addr;
 	struct timeval	time;

@@ -40,23 +40,27 @@ void		print_recv_verbose(int recv_len)
 	struct in_addr	in_addr;
 	struct timeval	time;
 
-	if (ping->set.timestamp)
+	ping->stats.recv_cnt++;
+	if (!ping->set.quiet)
 	{
-		gettimeofday(&time, NULL);
-		printf("[%li.%li] ", time.tv_sec, time.tv_usec);
-	}
-	if (inet_pton(AF_INET, ping->hostname, &in_addr.s_addr) < 1 &&
-		inet_pton(AF_INET, ping->host, &in_addr.s_addr) == 1 &&
-		!ping->set.numeric)
-	{
-		printf("%i bytes from %s (%s): ICMP type=%i code=%i\n",
-			recv_len, get_hostname_by_ip(in_addr), ping->host,
-			ping->pkt.hdr.type, ping->pkt.hdr.code);
-	}
-	else
-	{
-		printf("%i bytes from %s: ICMP type=%i code=%i\n",
-			recv_len, ping->host, ping->pkt.hdr.type, ping->pkt.hdr.code);
+		if (ping->set.timestamp)
+		{
+			gettimeofday(&time, NULL);
+			printf("[%li.%li] ", time.tv_sec, time.tv_usec);
+		}
+		if (inet_pton(AF_INET, ping->hostname, &in_addr.s_addr) < 1 &&
+			inet_pton(AF_INET, ping->host, &in_addr.s_addr) == 1 &&
+			!ping->set.numeric)
+		{
+			printf("%i bytes from %s (%s): ICMP type=%i code=%i\n",
+				recv_len, get_hostname_by_ip(in_addr), ping->host,
+				ping->pkt.hdr.type, ping->pkt.hdr.code);
+		}
+		else
+		{
+			printf("%i bytes from %s: ICMP type=%i code=%i\n",
+				recv_len, ping->host, ping->pkt.hdr.type, ping->pkt.hdr.code);
+		}
 	}
 }
 
@@ -70,7 +74,8 @@ void		pkt_received(char *ptr, int recv_len)
 	{
 		if (ip->ip_p != IPPROTO_ICMP)
 			return ;
-		if (ping->pkt.hdr.type == 69 && ping->pkt.hdr.code == 0 && !ping->set.verbose)
+		if (ping->pkt.hdr.type == 69 && ping->pkt.hdr.code == 0
+									&& !ping->set.verbose)
 		{
 			ping->stats.recv_cnt++;
 			rtt = rtt_calcul(&ping->time.send);
@@ -80,11 +85,7 @@ void		pkt_received(char *ptr, int recv_len)
 				print_recv(rtt, ip->ip_ttl, recv_len);
 		}
 		else if (ping->set.verbose)
-		{
-			ping->stats.recv_cnt++;
-			if (!ping->set.quiet)
-				print_recv_verbose(recv_len);
-		}
+			print_recv_verbose(recv_len);
 		else
 			printf("Error..Packet received with ICMP type %i code %i\n",
 					ping->pkt.hdr.type, ping->pkt.hdr.code);

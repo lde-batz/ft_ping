@@ -29,7 +29,6 @@ void	stat_calcul(void)
 	ping->stats.time = ping_duration_calcul(&ping->time.start);
 	ping->stats.pck_loss = 100 -
 						((ping->stats.recv_cnt / ping->stats.msg_cnt) * 100);
-
 	if (!ping->set.verbose)
 	{
 		free_list_rtt = ping->rtt_list;

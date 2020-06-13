@@ -20,7 +20,7 @@ void	get_ip_by_hostname(void)
 	freeaddrinfo(res);
 }
 
-char		*get_hostname_by_ip(struct in_addr ip)
+char	*get_hostname_by_ip(struct in_addr ip)
 {
 	struct hostent *hostent;
 
