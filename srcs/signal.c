@@ -10,7 +10,7 @@ void	sig_int(int signum)
 			ping->stats.msg_cnt, ping->stats.recv_cnt);
 	printf(" %.0f%c packet loss, time %.0fms\n",
 			ping->stats.pck_loss, '%', ping->stats.time);
-	if (ping->stats.pck_loss < 100)
+	if (ping->stats.pck_loss < 100 && !ping->set.verbose)
 	{
 		printf("rtt min/avg/max/mdev = %g/%g/%g/%.3f ms\n", ping->stats.min,
 				ping->stats.avg, ping->stats.max, ping->stats.mdev);

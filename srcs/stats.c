@@ -26,20 +26,24 @@ void	stat_calcul(void)
 {
 	t_rtt_list	*free_list_rtt;
 
-	free_list_rtt = ping->rtt_list;
 	ping->stats.time = ping_duration_calcul(&ping->time.start);
 	ping->stats.pck_loss = 100 -
 						((ping->stats.recv_cnt / ping->stats.msg_cnt) * 100);
-	while (ping->rtt_list)
+
+	if (!ping->set.verbose)
 	{
-		ping->rtt_list->rtt = ping->rtt_list->rtt - ping->stats.avg;
-		ping->stats.mdev += ft_powf(ping->rtt_list->rtt, 2);
 		free_list_rtt = ping->rtt_list;
-		ping->rtt_list = ping->rtt_list->next;
-		free(free_list_rtt);
+		while (ping->rtt_list)
+		{
+			ping->rtt_list->rtt = ping->rtt_list->rtt - ping->stats.avg;
+			ping->stats.mdev += ft_powf(ping->rtt_list->rtt, 2);
+			free_list_rtt = ping->rtt_list;
+			ping->rtt_list = ping->rtt_list->next;
+			free(free_list_rtt);
+		}
+		ping->stats.mdev /= ping->stats.msg_cnt;
+		ping->stats.mdev = ft_sqrtf(ping->stats.mdev);
 	}
-	ping->stats.mdev /= ping->stats.msg_cnt;
-	ping->stats.mdev = ft_sqrtf(ping->stats.mdev);
 }
 
 void	update_stats(double rtt)

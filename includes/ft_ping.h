@@ -102,6 +102,7 @@ typedef struct	s_ping
 void			parsing(int argc, char **argv);
 
 void			get_ip_by_hostname(void);
+char			*get_hostname_by_ip(struct in_addr ip);
 
 void			start_ping(void);
 

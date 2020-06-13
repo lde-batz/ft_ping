@@ -19,3 +19,13 @@ void	get_ip_by_hostname(void)
 	ping->host = ft_strdup(host);
 	freeaddrinfo(res);
 }
+
+char		*get_hostname_by_ip(struct in_addr ip)
+{
+	struct hostent *hostent;
+
+	hostent = gethostbyaddr(&ip, sizeof(ip), AF_INET);
+	if (hostent)
+		return (hostent->h_name);
+	return (inet_ntoa(ip));
+}

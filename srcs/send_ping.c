@@ -15,6 +15,31 @@ void	init_pkt(void)
 	ping->pkt.hdr.checksum = checksum_calcul(&ping->pkt, sizeof(ping->pkt));
 }
 
+void		print_send_verbose(void)
+{
+	struct in_addr	in_addr;
+	struct timeval	time;
+
+	if (ping->set.timestamp)
+	{
+		gettimeofday(&time, NULL);
+		printf("[%li.%li] ", time.tv_sec, time.tv_usec);
+	}
+	if (inet_pton(AF_INET, ping->hostname, &in_addr.s_addr) < 1 &&
+		inet_pton(AF_INET, ping->host, &in_addr.s_addr) == 1 &&
+		!ping->set.numeric)
+	{
+		printf("%i bytes to %s (%s): ICMP type=%i code=%i\n",
+			PING_PKT_LEN, get_hostname_by_ip(in_addr), ping->host,
+			ping->pkt.hdr.type, ping->pkt.hdr.code);
+	}
+	else
+	{
+		printf("%i bytes to %s: ICMP type=%i code=%i\n",
+			PING_PKT_LEN, ping->host, ping->pkt.hdr.type, ping->pkt.hdr.code);
+	}
+}
+
 void	send_ping(void)
 {
 	check_loop_out(0);
@@ -26,5 +51,9 @@ void	send_ping(void)
 	{
 		perror("Error sendto()");
 		ping->sending = 0;
+	}
+	else if (ping->set.verbose)
+	{
+		print_send_verbose();
 	}
 }
