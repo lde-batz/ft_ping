@@ -35,7 +35,7 @@
 # define PING_PKT_LEN 64
 # define TTL_MAX 64
 
-struct s_ping	*ping;
+struct s_ping	*g_ping;
 
 typedef struct	s_parsing
 {
@@ -114,7 +114,6 @@ typedef struct	s_ping
 void			parsing(int argc, char **argv);
 
 void			get_ip_by_hostname(void);
-char			*get_hostname_by_ip(struct in_addr ip);
 
 void			start_ping(void);
 
@@ -126,8 +125,7 @@ void			send_ping(void);
 void			recv_pkt(void);
 
 void			stat_calcul(void);
-void			update_stats(double rtt);
-double			rtt_calcul(struct timeval *time);
+void			update_stats(double *rtt);
 
 unsigned short	checksum_calcul(void *pkt, int len);
 
