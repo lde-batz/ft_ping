@@ -62,7 +62,6 @@ void	send_ping(void)
 	if (sendto(g_ping->fd, &g_ping->pkt, sizeof(g_ping->pkt), 0,
 			(struct sockaddr *)&g_ping->s_addr, g_ping->addrlen) < 0)
 	{
-		perror("Error sendto()");
 		g_ping->sending = 0;
 	}
 	else if (g_ping->set.verbose)
