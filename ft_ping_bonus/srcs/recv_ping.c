@@ -74,9 +74,11 @@ void		pkt_received(void *ptr, int recv_len)
 
 	ip = ptr;
 	icmp = ptr + 20;
-	if (g_ping->sending)
+	if (g_ping->sending && ptr)
 	{
-		if (ip->protocol != IPPROTO_ICMP
+		if (g_ping->id == -1)
+			g_ping->id = icmp->un.echo.id;
+		if (ip->protocol != IPPROTO_ICMP || icmp->un.echo.id != g_ping->id
 					|| icmp->un.echo.sequence != g_ping->stats.msg_cnt - 1)
 			return ;
 		if (icmp->type == 0 && icmp->code == 0
@@ -89,9 +91,6 @@ void		pkt_received(void *ptr, int recv_len)
 		else if (icmp->type == 0 && icmp->code == 0
 										&& g_ping->set.verbose)
 			print_recv_verbose(recv_len, icmp);
-		else if (icmp->type != 8)
-			printf("Error..Packet received with ICMP type %i code %i\n",
-					icmp->type, icmp->code);
 	}
 }
 
