@@ -90,6 +90,7 @@ typedef struct	s_ping
 {
 	char				*hostname;
 	char				*host;
+	int16_t				id;
 
 	int					fd;
 	char				loop;

@@ -20,6 +20,7 @@ void	init_ping(void)
 	g_ping->hostname = NULL;
 	g_ping->host = NULL;
 	g_ping->fd = -1;
+	g_ping->id = -1;
 	g_ping->loop = 1;
 	g_ping->res = NULL;
 	g_ping->rtt_list = NULL;
