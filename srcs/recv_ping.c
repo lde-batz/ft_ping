@@ -22,12 +22,12 @@ void		print_recv(double rtt, int ttl, int recv_len)
 		gettimeofday(&time, NULL);
 		printf("[%li.%li] ", time.tv_sec, time.tv_usec);
 	}
-	if (inet_pton(AF_INET, g_ping->hostname, &in_addr) < 1 &&
-		inet_pton(AF_INET, g_ping->host, &in_addr) == 1 &&
+	if (inet_pton(AF_INET, g_ping->hostname, &in_addr.s_addr) < 1 &&
+		inet_pton(AF_INET, g_ping->host, &in_addr.s_addr) == 1 &&
 		!g_ping->set.numeric)
 	{
 		printf("%i bytes from %s (%s): icmp_seq=%i ttl=%i time=%g ms\n",
-				recv_len, g_ping->hostname, g_ping->host,
+				recv_len, get_hostname_by_ip(in_addr), g_ping->host,
 				g_ping->stats.msg_cnt, ttl, rtt);
 	}
 	else
@@ -55,7 +55,7 @@ void		print_recv_verbose(int recv_len, struct icmphdr *icmp)
 			!g_ping->set.numeric)
 		{
 			printf("%i bytes from %s (%s): ICMP type=%i code=%i\n",
-				recv_len, g_ping->hostname, g_ping->host,
+				recv_len, get_hostname_by_ip(in_addr), g_ping->host,
 				icmp->type, icmp->code);
 		}
 		else

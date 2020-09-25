@@ -14,7 +14,7 @@
 
 void	get_ip_by_hostname(void)
 {
-	char				host[INET_ADDRSTRLEN];
+	char				*host;
 	struct addrinfo		hints;
 	struct addrinfo		*res;
 	struct sockaddr_in	*host_sockaddr;
@@ -27,9 +27,17 @@ void	get_ip_by_hostname(void)
 		exit_ping(NULL);
 	}
 	host_sockaddr = (struct sockaddr_in *)res->ai_addr;
-	if (inet_ntop(AF_INET, &host_sockaddr->sin_addr, host, INET_ADDRSTRLEN)
-																	== NULL)
-		exit_ping("Error inet_ntop(): host couldn't be changed");
+	host = inet_ntoa(host_sockaddr->sin_addr);
 	g_ping->host = ft_strdup(host);
 	freeaddrinfo(res);
+}
+
+char	*get_hostname_by_ip(struct in_addr ip)
+{
+	struct hostent *hostent;
+
+	hostent = gethostbyaddr(&ip, sizeof(ip), AF_INET);
+	if (hostent)
+		return (hostent->h_name);
+	return (inet_ntoa(ip));
 }

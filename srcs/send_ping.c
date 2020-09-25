@@ -43,7 +43,7 @@ void	print_send_verbose(void)
 		!g_ping->set.numeric)
 	{
 		printf("%i bytes to %s (%s): ICMP type=%i code=%i\n",
-			PING_PKT_LEN, g_ping->hostname, g_ping->host,
+			PING_PKT_LEN, get_hostname_by_ip(in_addr), g_ping->host,
 			g_ping->pkt.hdr.type, g_ping->pkt.hdr.code);
 	}
 	else
@@ -62,6 +62,7 @@ void	send_ping(void)
 	if (sendto(g_ping->fd, &g_ping->pkt, sizeof(g_ping->pkt), 0,
 			(struct sockaddr *)&g_ping->s_addr, g_ping->addrlen) < 0)
 	{
+		perror("Error sendto()");
 		g_ping->sending = 0;
 	}
 	else if (g_ping->set.verbose)
